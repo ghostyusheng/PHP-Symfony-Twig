@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ListController extends AbstractController
 {
-    #[Route('/list')]
+    #[Route('/list', name: 'list')]
     public function show(EntityManagerInterface $entityManager): Response
     {
         $products = $entityManager->getRepository(Myads::class)->findAll();
