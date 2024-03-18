@@ -16,8 +16,11 @@
                   margin-top: 20px;
                 }
             </style>
+            <script>
+            </script>
         </head>
         <body>
+          <b>Simple CMS config Demo</b>
           {% for i in products %}
           <div class="ads">
               {% set rand = random(3) %}
@@ -29,6 +32,13 @@
               </div>
           </div>
           {% endfor %}
+          <form action="add">
+            <label>Add new Ads Title</label>
+            <input type="text" id="title" name="title"><br><br>
+            <label>Add new Ads Content:</label>
+            <input type="text" id="content" name="content"><br><br>
+            <button type="submit" id="submit">submit</button>
+          </form>
         </body>
     </html>
 {% endapply %}
