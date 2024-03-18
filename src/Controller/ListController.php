@@ -2,18 +2,24 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Myads;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ListController 
+class ListController extends AbstractController
 {
     #[Route('/list')]
-    public function number(): Response
+    public function show(EntityManagerInterface $entityManager): Response
     {
-        $number = random_int(0, 100);
+        $products = $entityManager->getRepository(Myads::class)->findAll();
 
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
+        if (!$products) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
+        return $this->render('list.html.twig', ['products' => $products]);
     }
 }
