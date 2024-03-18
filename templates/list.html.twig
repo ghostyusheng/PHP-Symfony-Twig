@@ -1,1 +1,34 @@
-<h1>Your lucky number is {{ products[0].title}}</h1>
+{% apply inline_css %}
+    <html>
+        <head>
+            <style>
+                .ads {
+                  color: red;
+                  display: flex;
+                }
+
+                .ads-img {
+                  width: 200px;
+                }
+
+                .ads-title {
+                  color: black;
+                  margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+          {% for i in products %}
+          <div class="ads">
+              {% set rand = random(3) %}
+              {% set uri = 'img/'~rand~'.png' %}
+              <img class="ads-img" src="{{asset(uri)}}" />
+              <div>
+                <div class="ads-title">{{i.title}}</div>
+                <p>{{i.content}}</p>
+              </div>
+          </div>
+          {% endfor %}
+        </body>
+    </html>
+{% endapply %}
